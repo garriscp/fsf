@@ -1,0 +1,27 @@
+<% title "Sign Up" %>
+
+
+<div id="container">
+  <h2><%= yield :title %></h2>
+  <div id="logoBox" ><%= image_tag "sonic.png", :size => "65x75", :alt =>"Sonic Twitter"%></div>
+  <div id="inputBox">
+    <div class="loginForm">
+
+    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+    <%= devise_error_messages! %>
+    
+    <div><%= f.text_field :email, :placeholder => "Username", :class => "input" %></div>
+
+    <div><%= f.password_field :password, :placeholder => "Password", :class => "input" %></div>
+
+    <div><%= f.password_field :password, :placeholder => "Confirm Password", :class => "input" %></div>
+    
+    <div><%= f.email_field :email, :placeholder => "Email", :class => "input" %></div>
+    
+    </div>
+  
+  <div><%= f.submit "Sign up", :class => "styled-button" %></div>
+<% end %>
+
+<%= render "devise/shared/links" %>
+</div></div>

@@ -1,0 +1,105 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+*/
+
+body {
+  background-color: #002635;
+  color: whitesmoke;
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+a {
+   color:whitesmoke 
+}
+
+/*colors:
+#002635 - dark blue
+#013440 - teal
+#AB1A25 - red
+#D97925 - orange
+#EFE7BE - offwhite
+*/
+
+#container {
+	width: 300px;
+	margin: auto;
+    font-family:'Verdana',Arial,sans-serif;
+}
+
+#logoBox {
+	height: 75px;
+    text-align:center;
+    margin-bottom: 10px;
+}
+
+#loginForm {
+	text-align: center;
+}
+
+#nameInput {
+	margin-bottom: 5px;
+}
+
+#passwordLink {
+    margin-top: 15px;
+	color: whitesmoke;
+    width: 100%;
+    text-align: center;
+    font-size: 10px;
+}
+
+.input {
+	border-radius: 5px;
+    width: 245px;
+}
+
+.loginForm {
+    width: 250px;
+    margin:auto;
+}
+
+.noUnderline {
+    text-decoration: none;
+}
+
+.styled-button {
+	-webkit-box-shadow:rgba(0,0,0,0.2) 0 1px 0 0;
+	-moz-box-shadow:rgba(0,0,0,0.2) 0 1px 0 0;
+	box-shadow:rgba(0,0,0,0.2) 0 1px 0 0;
+	border-bottom-color:#333;
+	border:1px solid #61c4ea;
+	background-color:#D97925;
+	border-radius:5px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	color:#EFE7BE;
+	font-size:14px;
+    font-family:'Verdana',Arial,sans-serif;
+	text-shadow:#b2e2f5 0 1px 0;
+	/*padding:5px*/
+    display: block;
+	margin: auto;
+	margin-top: 20px;
+    width: 250px;
+    height: 25px;
+}
+
+.smaller-button {
+    width: 175px;
+    background-color: #013440;
+    margin-top: 30px;
+    font-size: 12px;
+    height: 20px;
+}
