@@ -7,7 +7,13 @@ class User < ActiveRecord::Base
 		 
   validates_presence_of :username
   validates_uniqueness_of :username
+  has_many :teams
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :username
+  
+  
+  def to_param
+      username.parameterize
+  end
 end

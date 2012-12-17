@@ -1,1 +1,9 @@
 <% title "All The Teams" %>
+
+<h1><%= yield :title %></h1>
+<% @teams.each do |team| %>
+<%= link_to edit_user_team_path(current_user, team) do %>
+<%=  content_tag(:div, content_tag(:p, team.name, :class => "va"), :class => "teamOrb") %>
+<% end %>
+<% end %>
+
