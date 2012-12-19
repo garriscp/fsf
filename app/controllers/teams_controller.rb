@@ -1,4 +1,10 @@
 class TeamsController < ApplicationController
+  before_filter :get_user
+  
+  def get_user
+    @user = User.where(:username => params[:user_id]).first
+  end
+  
   def new
     @team = current_user.teams.new
   end
@@ -14,6 +20,11 @@ class TeamsController < ApplicationController
   end
   
   def index
-    @teams = current_user.teams
+    @teams = @user.teams
+  end
+  
+  def show
+    @team = @user.teams.find(params[:id])
+    @tweets = Twitter.user_timeline("mlandconnor");
   end
 end

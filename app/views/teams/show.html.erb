@@ -1,0 +1,10 @@
+<% title @team.name %>
+
+<h1><%= yield :title %></h1>
+
+<% @tweets.each do |tweet| %>
+  <p><%= tweet.text %></p>
+<% end %>
+
+
+
