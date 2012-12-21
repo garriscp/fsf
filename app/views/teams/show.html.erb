@@ -2,9 +2,13 @@
 
 <h1><%= yield :title %></h1>
 
+<table>
 <% @tweets.each do |tweet| %>
-  <p><%= tweet.text %></p>
+  <tr>
+    <td><%= image_tag(tweet.user.profile_image_url,  :alt =>tweet.user.name)%></td>
+    <td><%= tweet.text %></td>
+  </tr>
 <% end %>
-
+</table>
 
 

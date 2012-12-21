@@ -1,5 +1,7 @@
 Fsf::Application.routes.draw do
   
+  match ":id/teams/prepare" => "teams#prepare"
+  
   root :to => 'teams#index'
   
   get "memos/new"
@@ -13,7 +15,6 @@ Fsf::Application.routes.draw do
   resources :users, :path => "" do
     resources :teams
   end
-  
   
   
 end
