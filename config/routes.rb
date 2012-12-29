@@ -2,7 +2,7 @@ Fsf::Application.routes.draw do
   
   match ":id/teams/prepare" => "teams#prepare"
   
-  root :to => 'teams#index'
+  root :to => 'teams#home'
   
   get "memos/new"
 

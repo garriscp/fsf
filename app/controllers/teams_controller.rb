@@ -93,4 +93,14 @@ class TeamsController < ApplicationController
   def prepare
   
   end
+  
+  def home
+    if current_user
+      redirect_to user_teams_path(current_user), :notice => "Welcome back #{current_user.username}!"
+    end
+  end
+  
+  def _navMenu
+    @connor = "test"
+  end
 end

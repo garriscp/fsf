@@ -6,7 +6,6 @@ class ApplicationController < ActionController::Base
   before_filter :get_tweets
   #client.friends_timeline.each  { |tweet| puts tweet.inspect }
   
-  
   def get_tweets
       Twitter.configure do |config|
           config.consumer_key = "hizYaomd8nNSeRsWih8NQ"
@@ -16,4 +15,5 @@ class ApplicationController < ActionController::Base
       end
           #do something here
    end
+
 end

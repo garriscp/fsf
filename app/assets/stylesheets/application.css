@@ -124,3 +124,55 @@ a {
   vertical-align: middle;
   text-align: center;
 }
+
+.myHeader {
+  width: 100%;
+  height: 40px;
+  background-color: #D97925;
+  border-radius:5px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+  position: relative;
+}
+
+.navTab {
+  height: 20px;
+  width: 20px;
+  background-color: whitesmoke;
+  top: 10px;
+  right: 4%;
+  cursor: pointer;
+  position: absolute;
+}
+
+.navMenu {
+  width: 100%;
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  z-index: 10000;
+  height: 100%;
+  background-color: whitesmoke;
+  display: none;
+  color: #002635;
+}
+
+.navMenu a {
+  color: #002635;
+}
+
+.navMenu table {
+  width: 100%;
+  font-size: 16px;
+}
+
+.navMenu td {
+  padding: 6% 0 4%;
+  border-top: 1px solid #EBEBEB;
+  border-bottom: 1px solid #EBEBEB;
+  text-align: center;
+}
+
+.menuVisible {
+  display: block;
+}
