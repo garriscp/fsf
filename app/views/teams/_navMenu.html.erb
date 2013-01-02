@@ -1,8 +1,12 @@
 <nav id="navMenu" class="navMenu">
       <table>
         <tr><td align="center"><%= image_tag "sonic.png", :size => "65x75", :alt =>"Sonic Twitter"%></td></tr>
-      <% current_user.teams.each do |team| %>
-        <tr><td align="center"><%= link_to team.name, user_team_path(current_user, team) %></td></tr>
-      <% end %>
+        <% if current_user %>
+          <tr><td align="center"><%= link_to "Add A Team", prepare_path(current_user) %></td></tr>
+          <% current_user.teams.each do |team| %>
+            <tr><td align="center"><%= link_to team.name, user_team_path(current_user, team) %></td></tr>
+          <% end %>
+          <tr><td align="center"><%= link_to "Sign Out", destroy_user_session_path, :method => :delete %></td></tr>
+        <% end %>
     </table>
 </nav>

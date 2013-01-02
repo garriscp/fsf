@@ -3,12 +3,20 @@
 <h1><%= yield :title %></h1>
 
 <table>
-<% @tweets.each do |tweet| %>
   <tr>
-    <td><%= image_tag(tweet.user.profile_image_url,  :alt =>tweet.user.name)%></td>
-    <td><%= tweet.text %></td>
+    <td>First Name</td>
+    <td>Last Name</td>
+    <td>Team</td>
+    <td>Position</td>
   </tr>
-<% end %>
+  <% @players.each do |player| %>
+    <tr>
+      <td><%= player.fname %></td>
+      <td><%= player.lname %></td>
+      <td><%= player.team %></td>
+      <td><%= player.position %></td>
+    </tr>
+  <% end %>
 </table>
 
 

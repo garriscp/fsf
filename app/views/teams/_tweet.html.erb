@@ -1,0 +1,6 @@
+<% @tweets.each do |tweet| %>
+  <tr>
+    <td><%= image_tag(tweet.user.profile_image_url,  :alt =>tweet.user.name)%></td>
+    <td><%= tweet.text %></td>
+  </tr>
+<% end %>

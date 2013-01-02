@@ -1,4 +1,5 @@
 class Player < ActiveRecord::Base
-  belongs_to :team
+  has_many :passignments
+  has_many :teams, :through => :passignments
   attr_accessible :fname, :lname, :position, :team
 end

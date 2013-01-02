@@ -36,18 +36,19 @@ class TeamsController < ApplicationController
   end
   
   def new
-    @team = current_user.teams.new
-    
+   user = User.where(:username => params[:id]).first
+   @team = user.teams.new
+   @player = Player.new
+   
     fnames = Array.new()
     lnames = Array.new()
     pos = Array.new()
     playerTeam = Array.new()
-    
+  
     url = params["url"]
     doc = Nokogiri::HTML(open(url))
     
-    @teamTitle = get_title doc.at_css("title").text
-    
+    @teamTitle = get_title doc.at_css("title").text 
     playersRaw = doc.css(".playertablePlayerName")
     playersRaw.each do |player|
       commaPos = player.text.index(",")
@@ -73,10 +74,25 @@ class TeamsController < ApplicationController
   def create
     @team = current_user.teams.new(params[:team])
     @team.user_id = current_user.id
+    
+    @player = Player.new(params[:player])
+    
+    @passignment = Passignment.new
+    @passignment.team_id = @team.id
+    @passignment.player_id = @player.id
+    
     if @team.save
-        redirect_to user_teams_path(current_user), :notice => "Added Team!"
-    else
+      if @player.save
+        if @passignment.save
+          redirect_to user_teams_path(current_user), :notice => "Added Team!"
+        else
+          redirect_to user_teams_path(current_user), :notice => "Something Failed"
+        end
+      else
         redirect_to user_teams_path(current_user), :notice => "Something Failed"
+      end
+    else
+      redirect_to user_teams_path(current_user), :notice => "Something Failed"
     end
   end
   
@@ -87,7 +103,8 @@ class TeamsController < ApplicationController
   def show
     @team = @user.teams.find(params[:id])
     #@tweets = Twitter.user_timeline("mlandconnor");
-    @tweets = Twitter.search("'Matt Ryan'", :count => 3, :result_type => "recent").results.map
+    #@tweets = Twitter.search("'Matt Ryan'", :count => 3, :result_type => "recent").results.map
+    @players = @team.players
   end
   
   def prepare
@@ -96,7 +113,9 @@ class TeamsController < ApplicationController
   
   def home
     if current_user
-      redirect_to user_teams_path(current_user), :notice => "Welcome back #{current_user.username}!"
+      redirect_to user_teams_path(current_user), :notice => "Welcome #{current_user.username}!"
+      else
+      redirect_to new_user_session_path
     end
   end
   

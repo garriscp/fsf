@@ -20,16 +20,18 @@
       <tr>
         <td>First Name</td>
         <td>Last Name</td>
-        <td>Position</td>
         <td>Team</td>
+        <td>Position</td>
       </tr>
-      <% @playersZip.each do |fname, lname, team, pos| %>
-        <tr>
-          <td><%= f.text_field :fname, :value => fname %></td>
-          <td><%= f.text_field :lname, :value => lname %></td>
-          <td><%= f.text_field :team, :value => team %></td>
-          <td><%= f.text_field :position, :value => pos %></td>
-        </tr>
+      <%= fields_for :player do |fa| %>
+        <% @playersZip.each do |fname, lname, team, pos| %>
+          <tr>
+            <td><%= fa.text_field :fname, :value => fname %></td>
+            <td><%= fa.text_field :lname, :value => lname %></td>
+            <td><%= fa.text_field :team, :value => team %></td>
+            <td><%= fa.text_field :position, :value => pos %></td>
+          </tr>
+        <% end %>
       <% end %>
     </table>
     
