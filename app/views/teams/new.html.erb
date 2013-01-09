@@ -23,13 +23,13 @@
         <td>Team</td>
         <td>Position</td>
       </tr>
-      <%= fields_for :player do |fa| %>
-        <% @playersZip.each do |fname, lname, team, pos| %>
+      <% @playersZip.each_with_index do |name, index| %>
+        <%= fields_for "players[#{index}]" do |fa| %>
           <tr>
-            <td><%= fa.text_field :fname, :value => fname %></td>
-            <td><%= fa.text_field :lname, :value => lname %></td>
-            <td><%= fa.text_field :team, :value => team %></td>
-            <td><%= fa.text_field :position, :value => pos %></td>
+            <td><%= fa.text_field :fname, :value => name[0] %></td>
+            <td><%= fa.text_field :lname, :value => name[1] %></td>
+            <td><%= fa.text_field :team, :value => name[2] %></td>
+            <td><%= fa.text_field :position, :value => name[3] %></td>
           </tr>
         <% end %>
       <% end %>
@@ -37,3 +37,4 @@
     
     <p class="button"><%= f.submit %></p>
 <% end %>
+

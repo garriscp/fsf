@@ -75,22 +75,19 @@ class TeamsController < ApplicationController
     @team = current_user.teams.new(params[:team])
     @team.user_id = current_user.id
     
-    @player = Player.new(params[:player])
-    
-    @passignment = Passignment.new
-    @passignment.team_id = @team.id
-    @passignment.player_id = @player.id
-    
     if @team.save
-      if @player.save
-        if @passignment.save
-          redirect_to user_teams_path(current_user), :notice => "Added Team!"
-        else
-          redirect_to user_teams_path(current_user), :notice => "Something Failed"
+      params[:players].each do |player|
+      #Rails.logger.debug("here are the players: #{player}")
+        @player = Player.new(:fname => player[1]["fname"], :lname => player[1]["lname"], :position => player[1]["position"], :team => player[1]["team"])
+        if @player.save
+          @passignment = Passignment.new
+          @passignment.team_id = @team.id
+          @passignment.player_id = @player.id
+          @passignment.save
         end
-      else
-        redirect_to user_teams_path(current_user), :notice => "Something Failed"
       end
+        
+      redirect_to user_teams_path(current_user), :notice => "Added Team!"
     else
       redirect_to user_teams_path(current_user), :notice => "Something Failed"
     end
@@ -117,6 +114,11 @@ class TeamsController < ApplicationController
       else
       redirect_to new_user_session_path
     end
+  end
+  
+  def destroy
+    @user.teams.find(params[:id]).destroy
+    redirect_to user_teams_path(current_user), :notice => "Team Deleted!"
   end
   
   def _navMenu
