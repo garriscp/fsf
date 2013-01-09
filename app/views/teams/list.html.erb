@@ -1,0 +1,23 @@
+<% title @team.name %>
+
+<h1><%= yield :title %></h1>
+
+<table>
+  <tr>
+    <td>First Name</td>
+    <td>Last Name</td>
+    <td>Team</td>
+    <td>Position</td>
+  </tr>
+  <% @players.each do |player| %>
+    <tr>
+      <td><%= player.fname %></td>
+      <td><%= player.lname %></td>
+      <td><%= player.team %></td>
+      <td><%= player.position %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to "Delete Team", user_team_path(current_user, @team), :method => :delete %>
+

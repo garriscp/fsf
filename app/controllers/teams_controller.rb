@@ -100,8 +100,15 @@ class TeamsController < ApplicationController
   def show
     @team = @user.teams.find(params[:id])
     #@tweets = Twitter.user_timeline("mlandconnor");
-    #@tweets = Twitter.search("'Matt Ryan'", :count => 3, :result_type => "recent").results.map
     @players = @team.players
+    @tweetArray = Hash.new
+    @players.each do |player|
+      fullName = player.fname + " " + player.lname
+      tweets = Twitter.search(fullName, :count => 3, :result_type => "recent").results.map
+      @tweetArray[fullName] = tweets
+    end
+    
+    
   end
   
   def prepare
