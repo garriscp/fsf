@@ -35,6 +35,10 @@ class TeamsController < ApplicationController
     return retTeam
   end
   
+  def get_football_handles
+    handles = ["MatthewBerryTMR", "SI_PeterKing", "EricMackFantasy", "allinkid", "NathanZegura", "CHarrisESPN", "Stephania_ESPN", "evansilva", "AdamSchefter", "mortreport", "Rotoworld_FB", "JasonLaCanfora", "ClaytonESPN", "JayGlazer", "MichaelLombardi", "AJMass", "BillSimmons", "ESPNFantasy", "ProFootballTalk", "ESPN_FFN", "YahooFootball", "richeisen"]
+  end
+  
   def new
    user = User.where(:username => params[:id]).first
    @team = user.teams.new
@@ -101,14 +105,36 @@ class TeamsController < ApplicationController
     @team = @user.teams.find(params[:id])
     #@tweets = Twitter.user_timeline("mlandconnor");
     @players = @team.players
-    @tweetArray = Hash.new
-    @players.each do |player|
-      fullName = player.fname + " " + player.lname
-      tweets = Twitter.search(fullName, :count => 3, :result_type => "recent").results.map
-      @tweetArray[fullName] = tweets
+    #@tweetArray = Hash.new
+    #@players.each do |player|
+      #fullName = player.fname + " " + player.lname
+      #tweets = Twitter.search(fullName, :count => 1, :result_type => "recent").results
+      #@tweetArray[fullName] = tweets
+    #end
+    finalHash = Hash.new
+    tweetArray = consolidate_tweets
+    tweetArray.each do |id, tweet|
+      @players.each do |player|
+        if (tweet[0]["text"].index(player.lname))
+          finalHash[id] = tweet
+          break
+        end
+      end
     end
-    
-    
+    @myTweetHash = finalHash.sort_by {|id, tweet| -id}
+  end
+  
+  def consolidate_tweets
+    experts = get_football_handles
+    tweetHash = Hash.new
+    experts.each do |expert|
+      tweets = Twitter.user_timeline(expert)
+      tweets.each do |tweet|
+        tweetHash[tweet.id] = ["name" => tweet.user.name, "text" => tweet.text, "created_at" => tweet.created_at, "profile_image_url" => tweet.user.profile_image_url]
+      end
+    end
+    #myTweetHash = tweetHash.sort_by {|id, tweet| -id}
+    return tweetHash
   end
   
   def prepare

@@ -2,14 +2,23 @@
 
 <h1><%= yield :title %></h1>
 
-<table>
-<% @tweetArray.each do |name, tweets| %>
-  <tr>
-    <td><%= image_tag(tweet.user.profile_image_url,  :alt =>tweet.user.name)%></td>
-    <td><%= tweet.text %></td>
+<div>
+<% @myTweetHash.each do |id, tweet| %>
+<table class="tweetTable">
+  <tr class="tweetHeader">
+    <td class="avatar" rowspan="3">
+      <%= image_tag(tweet[0]["profile_image_url"],  :alt =>tweet[0]["name"])%>
+    </td>
+    
+    <td class="userInfo"><%= tweet[0]["name"] %></td>
+    <td class="tweetTime"><%= tweet[0]["created_at"] %></td>
   </tr>
-<% end %>
+  <tr class="tweetMain">
+    <td colspan="2"><%= h(tweet[0]["text"]) %></td>
+  </tr>
 </table>
+<% end %>
+</div>
 
 <%= link_to "Delete Team", user_team_path(current_user, @team), :method => :delete %>
 
